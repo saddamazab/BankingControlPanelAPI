@@ -48,41 +48,41 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-    await CreateRoles(roleManager, userManager);
+    //await CreateRoles(roleManager, userManager);
 }
 
 app.Run();
 
 // Role creation method
-async Task CreateRoles(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
-{
-    string[] roleNames = { "Admin", "User" };
-    IdentityResult roleResult;
+//async Task CreateRoles(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+//{
+//    string[] roleNames = { "Admin", "User" };
+//    IdentityResult roleResult;
 
-    foreach (var roleName in roleNames)
-    {
-        var roleExist = await roleManager.RoleExistsAsync(roleName);
-        if (!roleExist)
-        {
-            roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
-        }
-    }
+//    foreach (var roleName in roleNames)
+//    {
+//        var roleExist = await roleManager.RoleExistsAsync(roleName);
+//        if (!roleExist)
+//        {
+//            roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
+//        }
+//    }
 
-    var powerUser = new IdentityUser
-    {
-        UserName = "admin@domain.com",
-        Email = "admin@domain.com",
-    };
+//    var powerUser = new IdentityUser
+//    {
+//        UserName = "admin@domain.com",
+//        Email = "admin@domain.com",
+//    };
 
-    string userPassword = "Admin@2030";
-    var user = await userManager.FindByEmailAsync("admin@domain.com");
+//    string userPassword = "Admin@2030";
+//    var user = await userManager.FindByEmailAsync("admin@domain.com");
 
-    if (user == null)
-    {
-        var createPowerUser = await userManager.CreateAsync(powerUser, userPassword);
-        if (createPowerUser.Succeeded)
-        {
-            await userManager.AddToRoleAsync(powerUser, "Admin");
-        }
-    }
-}
+//    if (user == null)
+//    {
+//        var createPowerUser = await userManager.CreateAsync(powerUser, userPassword);
+//        if (createPowerUser.Succeeded)
+//        {
+//            await userManager.AddToRoleAsync(powerUser, "Admin");
+//        }
+//    }
+//  }
